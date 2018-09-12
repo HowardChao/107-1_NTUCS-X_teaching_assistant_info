@@ -1,4 +1,4 @@
-# Environment Setting
+# 環境建置
 1. 下載並且安裝 R
     * [Windows下載連結](https://cran.r-project.org/bin/windows/base/)
     * [Mac下載連結](https://cran.r-project.org/bin/macosx/)
