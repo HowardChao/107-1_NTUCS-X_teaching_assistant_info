@@ -66,17 +66,16 @@ checkValid <- function(user.input){
   }
 }
 
-flag <- TRUE
-while(flag) {
+repeat{
   cat(paste0("Round ", player.A + player.B, "\n"))
   if (!(player.A + player.B)%%2) {
-    cat("Now is player A's term! : \n")
+    cat("Now is player A's term!\n")
     player <- "A"
   } else {
-    cat("Now is player B's term! : \n")
+    cat("Now is player B's term!\n")
     player <- "B"
   }
-  cat(paste(readInput(), "\n"))
+  readInput()
   if(user.input %in% seq(1, 9)){
     user.input <- strtoi(user.input)
     checkValid(user.input)
