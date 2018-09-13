@@ -1,95 +1,70 @@
+########################################################### Task 5
+
 # 猜數字遊戲
 # 1. 請寫一個由電腦隨機產生不同數字的四位數(1A2B遊戲)
 # 2. 玩家可重覆猜電腦所產生的數字，並提示猜測的結果(EX:1A2B)
 # 3. 一旦猜對，系統可自動計算玩家猜測的次數
 # 關於print和cat的差異：http://kliangh.blogspot.tw/2016/03/r-1.html
 
-# 無註解版
-ans <- sample(0:9, 4)
-guess.count <- 0
+# 我的假設：電腦隨機產生數字不可以重複
+#           使用者可以輸入重複數字
 
-repeat {
-  print("Please input 4 non-repetitive numbers.[integers between 0 to 9, aka c(0:9)")
-  guess <- scan(nmax = 4)
-  
-  a <- b <- 0
-  
-  if (!any(duplicated(guess))){
-    guess.count <- guess.count + 1
-    
-    for (i in 1:4) {
-      if (guess[i] == ans[i]) {
-        a <- a + 1
-      } else {
-        for (j in 1:4) {
-          if (guess[i] == ans[j]) {
-            b <- b + 1
+# Global variable for counting guessing times
+counter <- 0
+
+# Random number!(4 digit)
+random_number <- sample(0:9, 4)
+random_number
+
+# Input function
+readInput <- function(){
+  input_number <- readline("請輸入猜測數字：");
+  counter <<- counter + 1
+  return(input_number)
+}
+
+repeat{
+  a_count <- 0
+  b_count <- 0
+  input_number <- readInput()
+  if (input_number == "exit") {
+    cat("已經離開了遊戲！！\n")
+    break
+  }
+  if (nchar(input_number) != 4) {
+    cat("輸入長度不對！ 請從新輸入！！\n")
+  } else {
+    input_number_1 <- strtoi(substr(input_number, start = 1, stop = 1))
+    input_number_2 <- strtoi(substr(input_number, start = 2, stop = 2))
+    input_number_3 <- strtoi(substr(input_number, start = 3, stop = 3))
+    input_number_4 <- strtoi(substr(input_number, start = 4, stop = 4))
+    if (!(input_number_1 %in% seq(0, 9)) | 
+        !(input_number_2 %in% seq(0, 9)) | 
+        !(input_number_3 %in% seq(0, 9)) | 
+        !(input_number_4 %in% seq(0, 9))) {
+      cat("你的輸入有錯，請重新輸入！！\n")
+    } else {
+      user_input_list <- c(input_number_1, input_number_2, input_number_3, input_number_4) 
+      for(a in 1:4){
+        if(random_number[a] == user_input_list[a]){
+          a_count <- a_count + 1
+        }
+        for(b in 1:4){
+          if(a == b){
+            next
+          }
+          if(user_input_list[a] == random_number[b]){
+            b_count <- b_count + 1
           }
         }
       }
-    }
-    
-    cat("==== Your guess :", guess, ", Match : ", a, "A", b, "B\n")
-    
-    if (a == 4) {
-      cat("==== CORRECT! You guess for", guess.count, "times")
-      break
-    }
-    
-  } else {
-    cat("==== Input Error: Please input 4 <non-repetitive> numbers.\n")
-  }
-}
-
-
-# 註解版
-# Real answer 
-ans <- sample(0:9, 4)
-
-# Record times of guessing
-guess.count <- 0
-
-# Repeat loop for guessing
-repeat {
-  # Hint message
-  print("Please input 4 non-repetitive numbers.[integers between 0 to 9, aka c(0:9)")
-  
-  # Scan for input 
-  guess <- scan(nmax = 4)
-  
-  # The matchs hint, correct-a and correct-b  
-  a <- b <- 0
-  
-  # Check if the guess has duplicated numbers.
-  if (!any(duplicated(guess))){
-    
-    # Guessing time plus 1
-    guess.count <- guess.count + 1
-    
-    for (i in 1:4) {
-      # Check for correct-a
-      if (guess[i] == ans[i]) {
-        a <- a + 1
-      } else {
-        # Check for correct-b
-        for (j in 1:4) {
-          if (guess[i] == ans[j]) {
-            b <- b + 1
-          }
-        }
+      cat(paste(a_count, 'A, ', b_count, 'B'))
+      cat('\n')
+      if(a_count == 4 && b_count == 0){
+        cat("你成功猜到了！總共輸入了: ", counter, "次")
+        break
       }
     }
-    # Hint message
-    cat("==== Your guess :", guess, ", Match : ", a, "A", b, "B\n")
-    
-    # Game over situation
-    if (a == 4) {
-      cat("==== CORRECT! You guess for", guess.count, "times")
-      break
-    }
-    
-  } else {
-    # The guess has duplicated numbers.
-    cat("==== Input Error: Please input 4 <non-repetitive> numbers.\n")
   }
 }
+
