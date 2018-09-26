@@ -14,7 +14,7 @@ library(dplyr)
 ```
 
 2. 官方文件
-    * [dplyr overview](dplyr overview)
+    * [dplyr overview](http://dplyr.tidyverse.org/index.html)
     * [Package ‘dplyr’ pdf(v0.7.4, 2017.09)](https://cran.r-project.org/web/packages/dplyr/dplyr.pdf)
 
 3. 學習資源

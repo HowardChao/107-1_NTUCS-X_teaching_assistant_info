@@ -4,7 +4,7 @@
 
 1. 關於ggplot2的基本資訊：
     * [ggplot2官網](http://ggplot2.tidyverse.org/index.html)
-    * [ggplot2 function manual](ggplot2 function manual)
+    * [ggplot2 function manual](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
     * [ggplot2 cheat sheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 
 2. 學習ggplot2的資源：
